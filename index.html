@@ -1161,7 +1161,7 @@ function renderScen(mode){
   var raceStatus=losePct>=55?'In Race':losePct>=30?'Needs Help':'Must Win Out';
   cont.innerHTML=
     '<div class="scard sw"><div class="slbl">Win next match</div><div class="spct">'+winPct.toFixed(1)+'%</div><div class="sdesc">Top 4 chance if '+team+' beat '+opp+'.</div><div class="sc-mini"><div class="mini"><div class="k">Projected Place</div><div class="v">#'+winRank+'</div></div><div class="mini"><div class="k">Current Place</div><div class="v">#'+currentRank+'</div></div></div></div>'
-    +'<div class="scard sl"><div class="slbl">Lose next match</div><div class="spct">'+losePct.toFixed(1)+'%</div><div class="sdesc">Top 4 chance if '+team+' lose to '+opp+'.</div><div class="sc-mini"><div class="mini"><div class="k">Projected Place</div><div class="v">#'+loseRank+'</div></div><div class="mini"><div class="k">Race Status</div><div class="v">'+'+raceStatus+'+'</div></div></div><div class="snrr" style="margin-top:9px"><strong>To stay in the race, these results help:</strong><br>'+helpHtml+'</div></div>';
+    +'<div class="scard sl"><div class="slbl">Lose next match</div><div class="spct">'+losePct.toFixed(1)+'%</div><div class="sdesc">Top 4 chance if '+team+' lose to '+opp+'.</div><div class="sc-mini"><div class="mini"><div class="k">Projected Place</div><div class="v">#'+loseRank+'</div></div><div class="mini"><div class="k">Race Status</div><div class="v">'+raceStatus+'</div></div></div><div class="snrr" style="margin-top:9px"><strong>To stay in the race, these results help:</strong><br>'+helpHtml+'</div></div>';
 }
 
 function scenSim(fIdx,fWinner,pickFn,track){
@@ -1171,10 +1171,11 @@ function scenSim(fIdx,fWinner,pickFn,track){
 
 // UI
 function switchTab(t){
-  document.querySelectorAll(".tab").forEach(function(el,i){el.classList.toggle("active",["points","matches","top4","scenario"][i]===t);});
+  document.querySelectorAll(".tab").forEach(function(el,i){el.classList.toggle("active",["points","ours","yours","top4"][i]===t);});
   document.querySelectorAll(".sec").forEach(function(el){el.classList.remove("active");});
   document.getElementById("sec-"+t).classList.add("active");
   if(t==="top4")renderTop4Chips();
+  if(t==="yours")renderUserScenario();
 }
 
 // MY TOP 4
